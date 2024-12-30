@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your App Name</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-    </style>
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Welcome to Your App</h1>
-<p>This is a simple HTML page for your app.</p>
-    <footer>
-  <a href="/privacy-policy.html">Privacy Policy</a>
-</footer>
-
+    <div class="container">
+        <h1>الصفحة الرئيسية</h1>
+        <button id="shopButton">عرض المنتجات</button>
+        <button id="registerButton">تسجيل</button>
+        <button id="loginButton">تسجيل الدخول</button>
+        <button id="signOutButton" style="display:none;">تسجيل الخروج</button>
+        <button id="showProductButton" style="display:none;">عرض المنتجات الخاصة</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script src="script.js"></script>
 </body>
-    
 </html>
