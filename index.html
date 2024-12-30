@@ -1,22 +1,64 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصفحة الرئيسية</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>واجهة المتجر</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: url('designerbackround.jpg') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .button {
+            width: 210px;
+            padding: 10px 20px;
+            margin: 10px auto;
+            background-color: #800080;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none; /* مخفية بشكل افتراضي */
+        }
+
+        .button:hover {
+            background-color: #6a006a;
+        }
+
+        .button.show {
+            display: block; /* تظهر عند الحاجة */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>الصفحة الرئيسية</h1>
-        <button id="shopButton">عرض المنتجات</button>
-        <button id="registerButton">تسجيل</button>
-        <button id="loginButton">تسجيل الدخول</button>
-        <button id="signOutButton" style="display:none;">تسجيل الخروج</button>
-        <button id="showProductButton" style="display:none;">عرض المنتجات الخاصة</button>
+    <div id="container">
+        <button id="register_button" class="button">إنشاء حساب</button>
+        <button id="button_login" class="button">تسجيل الدخول</button>
+        <button id="shop_button" class="button show">التسوق</button>
+        <button id="show_product_button" class="button">إضافة منتج</button>
+        <button id="sign_out_button" class="button">تسجيل الخروج</button>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        // مثال على تغيير الرؤية بناءً على شروط معينة
+        const registerButton = document.getElementById('register_button');
+        const loginButton = document.getElementById('button_login');
+        const shopButton = document.getElementById('shop_button');
+        const showProductButton = document.getElementById('show_product_button');
+        const signOutButton = document.getElementById('sign_out_button');
+
+        // مثال: إظهار الأزرار عند الحاجة
+        registerButton.classList.add('show'); 
+        loginButton.classList.add('show');
+    </script>
 </body>
 </html>
