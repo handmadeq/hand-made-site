@@ -1,0 +1,59 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const shopButton = document.getElementById("shopButton");
+    const registerButton = document.getElementById("registerButton");
+    const loginButton = document.getElementById("loginButton");
+    const signOutButton = document.getElementById("signOutButton");
+    const showProductButton = document.getElementById("showProductButton");
+
+    // إعداد Firebase
+    const firebaseConfig = {
+        apiKey: "API_KEY",
+        authDomain: "PROJECT_ID.firebaseapp.com",
+        projectId: "PROJECT_ID",
+        storageBucket: "PROJECT_ID.appspot.com",
+        messagingSenderId: "SENDER_ID",
+        appId: "APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+
+    // التحقق من تسجيل الدخول
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            registerButton.style.display = "none";
+            loginButton.style.display = "none";
+            signOutButton.style.display = "block";
+            showProductButton.style.display = "block";
+        } else {
+            registerButton.style.display = "block";
+            loginButton.style.display = "block";
+            signOutButton.style.display = "none";
+            showProductButton.style.display = "none";
+        }
+    });
+
+    // التنقل بين الصفحات
+    shopButton.addEventListener("click", () => {
+        window.location.href = "product-list.html";
+    });
+
+    registerButton.addEventListener("click", () => {
+        window.location.href = "register.html";
+    });
+
+    loginButton.addEventListener("click", () => {
+        window.location.href = "login.html";
+    });
+
+    signOutButton.addEventListener("click", () => {
+        if (navigator.onLine) {
+            auth.signOut()
+                .then(() => alert("تم تسجيل الخروج بنجاح"))
+                .catch(error => alert("خطأ في تسجيل الخروج: " + error.message));
+        } else {
+            alert("يرجى التحقق من اتصال الإنترنت قبل تسجيل الخروج");
+        }
+    });
+});
