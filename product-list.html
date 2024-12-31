@@ -1,88 +1,4 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
-</head>
-<body>
-    <header>
-        <h1>قائمة المنتجات</h1>
-        <button id="signOutButton">تسجيل الخروج</button>
-    </header>
-
-    <main>
-        <section id="productsGrid">
-            <!-- المنتجات ستظهر هنا -->
-        </section>
-    </main>
-
-    <footer>
-        <button id="addProductButton">إضافة منتج</button>
-    </footer>
-
-    <script>
-        // إعداد Firebase
-        const firebaseConfig = {
-            apiKey: "API_KEY",
-            authDomain: "AUTH_DOMAIN",
-            projectId: "PROJECT_ID",
-            storageBucket: "STORAGE_BUCKET",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
-        };
-
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-
-        const productsGrid = document.getElementById('productsGrid');
-        const signOutButton = document.getElementById('signOutButton');
-        const addProductButton = document.getElementById('addProductButton');
-
-        // عرض قائمة المنتجات
-        function fetchProducts() {
-            db.collection('products')
-                .get()
-                .then(snapshot => {
-                    snapshot.forEach(doc => {
-                        const product = doc.data();
-                        const productCard = document.createElement('div');
-                        productCard.classList.add('product-card');
-                        productCard.innerHTML = `
-                            <img src="${product.imageUrls[0]}" alt="Product Image">
-                            <h2>${product.title}</h2>
-                            <p>${product.description}</p>
-                            <p>${product.price} ر.س</p>
-                        `;
-                        productsGrid.appendChild(productCard);
-                    });
-                })
-                .catch(error => console.error("Error fetching products: ", error));
-        }
-
-        // تسجيل الخروج
-        signOutButton.addEventListener('click', () => {
-            auth.signOut()
-                .then(() => window.location.href = 'login.html')
-                .catch(error => console.error("Error signing out: ", error));
-        });
-
-        // التنقل إلى صفحة إضافة منتج
-        addProductButton.addEventListener('click', () => {
-            window.location.href = 'addProduct.html';
-        });
-
-        // استدعاء دالة عرض المنتجات عند تحميل الصفحة
-        fetchProducts();
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -96,7 +12,6 @@
             background-color: #f7f7f7;
         }
 
-        /* Toolbar */
         .toolbar {
             background-color: #3f51b5;
             color: white;
@@ -112,14 +27,13 @@
             font-weight: bold;
         }
 
-        /* GridView */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 8px;
             padding: 16px;
-            margin-top: 60px; /* Space for toolbar */
-            margin-bottom: 60px; /* Space for BottomAppBar */
+            margin-top: 60px;
+            margin-bottom: 60px;
         }
 
         .grid-item {
@@ -131,7 +45,11 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* BottomAppBar */
+        .grid-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
         .bottom-app-bar {
             position: fixed;
             bottom: 0;
@@ -153,7 +71,6 @@
             cursor: pointer;
         }
 
-        /* Floating Action Button */
         .fab {
             position: fixed;
             bottom: 60px;
@@ -172,7 +89,6 @@
             border: none;
         }
 
-        /* Navigation Drawer */
         .drawer {
             position: fixed;
             top: 0;
@@ -220,7 +136,6 @@
             background-color: #f7f7f7;
         }
 
-        /* Overlay for Drawer */
         .overlay {
             position: fixed;
             top: 0;
@@ -239,12 +154,8 @@
 </head>
 <body>
 
-    <!-- Toolbar -->
-    <div class="toolbar">
-        𝒯𝑜𝓊𝒸𝒽 𝑜𝒻 𝒞𝓇𝑒𝒶𝓉𝒾𝓋𝒾𝓉𝓎
-    </div>
+    <div class="toolbar">𝒯𝑜𝓊𝒸𝒽 𝑜𝒻 𝒞𝓇𝑒𝒶𝓉𝒾𝓋𝒾𝓉𝓎</div>
 
-    <!-- Drawer -->
     <div class="drawer" id="drawer">
         <div class="drawer-header">القائمة</div>
         <ul class="drawer-menu">
@@ -255,28 +166,53 @@
         </ul>
     </div>
 
-    <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- GridView -->
-    <div class="grid-container">
-        <div class="grid-item">المنتج 1</div>
-        <div class="grid-item">المنتج 2</div>
-        <div class="grid-item">المنتج 3</div>
-        <div class="grid-item">المنتج 4</div>
-        <div class="grid-item">المنتج 5</div>
-        <div class="grid-item">المنتج 6</div>
-    </div>
+    <div class="grid-container" id="productsGrid"></div>
 
-    <!-- BottomAppBar -->
     <div class="bottom-app-bar">
         <button onclick="toggleDrawer()">☰ القائمة</button>
     </div>
 
-    <!-- Floating Action Button -->
     <button class="fab">+</button>
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+
     <script>
+        const firebaseConfig = {
+            apiKey: "API_KEY",
+            authDomain: "AUTH_DOMAIN",
+            projectId: "PROJECT_ID",
+            storageBucket: "STORAGE_BUCKET",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const productsGrid = document.getElementById('productsGrid');
+
+        function fetchProducts() {
+            db.collection('products')
+                .get()
+                .then(snapshot => {
+                    snapshot.forEach(doc => {
+                        const product = doc.data();
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('grid-item');
+                        productCard.innerHTML = `
+                            <img src="${product.imageUrls[0]}" alt="Product Image">
+                            <h2>${product.title}</h2>
+                            <p>${product.description}</p>
+                            <p>${product.price} ر.س</p>
+                        `;
+                        productsGrid.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error("Error fetching products: ", error));
+        }
+
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
 
@@ -289,6 +225,9 @@
             drawer.classList.remove('open');
             overlay.classList.remove('show');
         });
+
+        fetchProducts();
     </script>
 </body>
 </html>
+
