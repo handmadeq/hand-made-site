@@ -48,17 +48,37 @@
         <button id="sign_out_button" class="button">تسجيل الخروج</button>
     </div>
 
-    <script>
-        // مثال على تغيير الرؤية بناءً على شروط معينة
-        const registerButton = document.getElementById('register_button');
-        const loginButton = document.getElementById('button_login');
-        const shopButton = document.getElementById('shop_button');
-        const showProductButton = document.getElementById('show_product_button');
-        const signOutButton = document.getElementById('sign_out_button');
+   <script>
+    // عناصر الأزرار
+    const registerButton = document.getElementById('register_button');
+    const loginButton = document.getElementById('button_login');
+    const shopButton = document.getElementById('shop_button');
+    const showProductButton = document.getElementById('show_product_button');
+    const signOutButton = document.getElementById('sign_out_button');
 
-        // مثال: إظهار الأزرار عند الحاجة
-        registerButton.classList.add('show'); 
-        loginButton.classList.add('show');
-    </script>
+    // التنقل بين الصفحات
+    registerButton.addEventListener('click', () => {
+        window.location.href = 'register.html'; // صفحة تسجيل الحساب
+    });
+
+    loginButton.addEventListener('click', () => {
+        window.location.href = 'login.html'; // صفحة تسجيل الدخول
+    });
+
+    shopButton.addEventListener('click', () => {
+        window.location.href = 'product-list.html'; // صفحة قائمة المنتجات
+    });
+
+    showProductButton.addEventListener('click', () => {
+        window.location.href = 'addProduct.html'; // صفحة إضافة منتج
+    });
+
+    signOutButton.addEventListener('click', () => {
+        alert('تم تسجيل الخروج بنجاح!'); // يمكن استبدال التنبيه بعملية تسجيل خروج حقيقية.
+        // افتراضي: إعادة التوجيه إلى صفحة تسجيل الدخول.
+        window.location.href = 'login.html';
+    });
+</script>
+
 </body>
 </html>
