@@ -82,3 +82,213 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المنتجات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background-color: #3f51b5;
+            color: white;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* GridView */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+            padding: 16px;
+            margin-top: 60px; /* Space for toolbar */
+            margin-bottom: 60px; /* Space for BottomAppBar */
+        }
+
+        .grid-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* BottomAppBar */
+        .bottom-app-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #3f51b5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .bottom-app-bar button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 60px;
+            right: 16px;
+            width: 50px;
+            height: 50px;
+            background-color: #8A9CB3;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            border: none;
+        }
+
+        /* Navigation Drawer */
+        .drawer {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 16px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .drawer-menu li {
+            padding: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .drawer-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: block;
+        }
+
+        .drawer-menu li:hover {
+            background-color: #f7f7f7;
+        }
+
+        /* Overlay for Drawer */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        𝒯𝑜𝓊𝒸𝒽 𝑜𝒻 𝒞𝓇𝑒𝒶𝓉𝒾𝓋𝒾𝓉𝓎
+    </div>
+
+    <!-- Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">القائمة</div>
+        <ul class="drawer-menu">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">إضافة منتج</a></li>
+            <li><a href="#">المنتجات</a></li>
+            <li><a href="#">تسجيل الخروج</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- GridView -->
+    <div class="grid-container">
+        <div class="grid-item">المنتج 1</div>
+        <div class="grid-item">المنتج 2</div>
+        <div class="grid-item">المنتج 3</div>
+        <div class="grid-item">المنتج 4</div>
+        <div class="grid-item">المنتج 5</div>
+        <div class="grid-item">المنتج 6</div>
+    </div>
+
+    <!-- BottomAppBar -->
+    <div class="bottom-app-bar">
+        <button onclick="toggleDrawer()">☰ القائمة</button>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab">+</button>
+
+    <script>
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
