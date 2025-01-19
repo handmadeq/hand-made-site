@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قائمة المنتجات</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <style>
         body {
             margin: 0;
@@ -55,12 +55,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50px;
+            height: 100px;
             background-color: #3f51b5;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             z-index: 1000;
+            color: white;
+            font-size: 16px;
         }
 
         .bottom-app-bar button {
@@ -73,7 +76,7 @@
 
         .fab {
             position: fixed;
-            bottom: 60px;
+            bottom: 120px;
             right: 16px;
             width: 50px;
             height: 50px;
@@ -171,6 +174,17 @@
     <div class="grid-container" id="productsGrid"></div>
 
     <div class="bottom-app-bar">
+        <div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-app-pub-2902885902339470"
+                 data-ad-slot="8394258702"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         <button onclick="toggleDrawer()">☰ القائمة</button>
     </div>
 
@@ -182,11 +196,10 @@
     <script>
         const firebaseConfig = {
             apiKey: "",
-             authDomain: "", // استخدم هذه القيمة
-
+            authDomain: "",
             projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
+            storageBucket: "",
+            messagingSenderId: "",
             appId: ""
         };
 
@@ -231,3 +244,4 @@
     </script>
 </body>
 </html>
+
